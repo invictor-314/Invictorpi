@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invictor Pi</title>
+
+        <!-- === PLACEHOLDER FAVICON === -->
+    <!-- Ganti URL di href dengan link ke gambar favicon Anda (sebaiknya .png berbentuk lingkaran) -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for the tech/AI theme */
+        body {
+            background-color: #0d1117; /* GitHub dark background color */
+            font-family: 'Inter', sans-serif;
+            color: #c9d1d9; /* GitHub dark text color */
+        }
+
+        /* Keyframes untuk animasi denyut neon */
+        @keyframes pulse-glow {
+            0%, 100% {
+                text-shadow: 0 0 5px #58a6ff, 0 0 10px #58a6ff;
+            }
+            50% {
+                text-shadow: 0 0 10px #58a6ff, 0 0 20px #58a6ff, 0 0 30px #58a6ff;
+            }
+        }
+
+        /* Neon glow effect for titles and borders */
+        .neon-blue-text {
+            color: #58a6ff;
+            animation: pulse-glow 3s ease-in-out infinite; /* Animasi ditambahkan di sini */
+        }
+        .neon-green-text {
+            color: #39d353;
+            text-shadow: 0 0 5px #39d353;
+        }
+        .neon-yellow-text {
+            color: #e3b341;
+            text-shadow: 0 0 5px #e3b341;
+        }
+
+        /* Styling for product blocks */
+        .product-block {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(88, 166, 255, 0.3);
+            border-color: #58a6ff;
+        }
+
+        /* Custom scrollbar for a more thematic look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #58a6ff;
+        }
+
+        /* Custom placeholder text color */
+        .search-input::placeholder {
+            color: #8b949e;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto max-w-3xl p-4 md:p-8">
+
+        <!-- Header Section -->
+        <header class="text-center mb-10">
+            <img src="Kucing Bisnis.png" alt="Logo Invictor Pi" class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full border-4 border-gray-700 shadow-lg mb-4">
+            <h1 class="text-4xl md:text-5xl font-bold neon-blue-text">Invictor Pi</h1>
+            <p class="text-md md:text-lg text-gray-400 mt-2">Manfaatkan AI Sebelum Mereka Tak Bisa Diakses Lagi.</p>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="mb-8">
+            <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Cari produk atau komunitas..." class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all search-input">
+        </div>
+
+        <!-- Product List Section -->
+        <div id="productList" class="space-y-4">
+            <!-- Produk akan di-generate oleh JavaScript di bawah -->
+        </div>
+
+    </div>
+
+    <script>
+        // ===================================================================================
+        // === BAGIAN EDIT PRODUK ===
+        // Untuk menambah, mengubah, atau menghapus produk, edit daftar di bawah ini.
+        // - name: Nama produk (teks tebal).
+        // - description: Deskripsi singkat produk.
+        // - price: Harga. Tulis "Gratis" (case-insensitive) untuk warna hijau, atau teks lain (misal: "Rp 20k") untuk warna kuning.
+        // - link: URL tujuan ketika blok di-klik.
+        // - imageUrl: URL gambar produk (rasio 1:1). Gunakan https://placehold.co untuk placeholder.
+        // ===================================================================================
+        const productsData = [
+            {
+                name: "Discord",
+                description: "Bergabung dengan komunitas para pegiat AI dan konten kreator di Indonesia. Diskusi, belajar, dan berkolaborasi.",
+                price: "Gratis",
+                link: "https://discord.gg/9YdZvSPk", // Ganti dengan link Discord Anda
+                imageUrl: "https://pngimg.com/d/discord_PNG3.png"
+            },
+            {
+                name: "YouTube",
+                description: "Channel Youtube resmi dari Invictor Pi, tutorial AI baru tiap minggunya.",
+                price: "Gratis",
+                link: "https://www.youtube.com/@invictor314/videos", // Ganti dengan link produk Anda
+                imageUrl: "https://static.vecteezy.com/system/resources/thumbnails/018/930/575/small_2x/youtube-logo-youtube-icon-transparent-free-png.png"
+            },
+            {
+                name: "Tutorial Daftar Veo 3",
+                description: "Tutorial lengkap daftar dan menggunakan Veo 3 dari nol.",
+                price: "Gratis",
+                link: "http://lynk.id/invictus31415/43jz1d6do0x5/checkout", // Ganti dengan link produk Anda
+                imageUrl: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/IO25_Gemini_MOD_v33_PART_1_DG_FINAL_54.max-1440x810.png"
+            },
+            {
+                name: "EBOOK Panduan AI Untuk Konten Kreator",
+                description: "EBOOK lengkap pembahasan cara menggunakan AI untuk konten kreator pemula.",
+                price: "Rp 20k",
+                link: "https://lynk.id/invictus31415/G0X95E9", // Ganti dengan link produk Anda
+                imageUrl: "https://cdn.lynkid.my.id/products/08-11-2024/1731081301166_4252833"
+            },
+            {
+                name: "ECourse Panduan Menggunakan ChatGPT",
+                description: "Kumpulan video tutorial menggunakan ChatGPT untuk bisnis digital dan membuat konten.",
+                price: "Rp 8k",
+                link: "https://lynk.id/invictus31415/pd3dozmnlrne", // Ganti dengan link produk Anda
+                imageUrl: "https://cdn.lynkid.my.id/draft-products/04-05-2025/1746356123597_9568446.webp"
+            },
+            {
+                name: "Kumpulan EBOOK Self Development",
+                description: "Kumpulan EBOOK pengembangan diri yang terkenal, bisa untuk para pemalas atau untuk dijual ulang.",
+                price: "Rp 10k",
+                link: "https://lynk.id/invictus31415/31zrejxpx4vw", // Ganti dengan link produk Anda
+                imageUrl: "https://cdn.lynkid.my.id/products/13-06-2025/1749791306542_4514919.webp"
+            },
+        ];
+
+        const productList = document.getElementById('productList');
+
+        // Fungsi untuk menampilkan produk ke halaman
+        function renderProducts(productsToRender) {
+            productList.innerHTML = ''; // Kosongkan daftar sebelum menampilkan yang baru
+
+            if (productsToRender.length === 0) {
+                productList.innerHTML = `<p class="text-center text-gray-500">Produk tidak ditemukan.</p>`;
+                return;
+            }
+
+            productsToRender.forEach(product => {
+                // Tentukan warna harga berdasarkan isinya
+                const isFree = product.price.toLowerCase() === 'gratis';
+                const priceColorClass = isFree ? 'neon-green-text' : 'neon-yellow-text';
+                const borderColorClass = isFree ? 'border-green-500/50' : 'border-yellow-500/50';
+
+                const productElement = document.createElement('a');
+                productElement.href = product.link;
+                productElement.target = "_blank"; // Buka di tab baru
+                productElement.rel = "noopener noreferrer";
+                productElement.classList.add('product-block', 'p-4', 'rounded-lg', 'flex', 'items-center', 'space-x-4', 'cursor-pointer', 'no-underline');
+                productElement.setAttribute('data-name', product.name.toLowerCase()); // Untuk pencarian
+
+                productElement.innerHTML = `
+                    <div class="flex-shrink-0">
+                        <img src="${product.imageUrl}" alt="Ikon untuk ${product.name}" class="w-16 h-16 md:w-20 md:h-20 rounded-md object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="font-bold text-lg text-gray-200">${product.name}</h3>
+                        <p class="text-sm text-gray-400">${product.description}</p>
+                    </div>
+                    <div class="flex-shrink-0 text-right">
+                        <span class="font-semibold text-md px-3 py-1 rounded-md border ${borderColorClass} ${priceColorClass}">${product.price}</span>
+                    </div>
+                `;
+                productList.appendChild(productElement);
+            });
+        }
+
+        // Fungsi untuk filter produk berdasarkan input pencarian
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredProducts = productsData.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm)
+            );
+            renderProducts(filteredProducts);
+        }
+
+        // Tampilkan semua produk saat halaman pertama kali dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(productsData);
+        });
+    </script>
+</body>
+</html>
